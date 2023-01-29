@@ -1,0 +1,40 @@
+:root {
+  /* Light Mode Theme */
+  --font-color-light: #212121;
+  --background-light: url("./assets/images/tS5xN.png");
+
+  /* Dark Mode Theme */
+  --font-color-dark: #fafafa;
+  --background-dark: url("./assets/images/tS5xN-dark.png");
+}
+@font-face {
+  font-family: "SFPro";
+  src: url("./assets/fonts/SFPRODISPLAYREGULAR.OTF");
+}
+/* Media Queries */
+@media screen and (max-width: 650px) {
+  .grid-container {
+    justify-content: flex-start;
+  }
+}
+/* Dark Mode CSS */
+.darkMode {
+  color: var(--font-color-dark);
+  background: var(--background-dark);
+  transition: background ease-out 700ms;
+}
+/* Main CSS */
+body {
+  font-family: "SFPro";
+  color: var(--font-color-light);
+  padding: 0;
+  margin: 0;
+  background: var(--background-light);
+  transition: background ease-out 700ms;
+}
+.title {
+  font-size: 2rem;
+  font-style: normal;
+  display: inline-block;
+  user-select: none;
+}

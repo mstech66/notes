@@ -1,0 +1,23 @@
+.note {
+  background-color: #f3e782;
+  height: 200px;
+  border-radius: 8px;
+  transition: all 500ms;
+  padding: 8px;
+  color: #262626 !important;
+  user-select: none;
+  overflow: hidden;
+}
+.note:hover {
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+}
+.note-title {
+  font-size: 1.5rem;
+  margin: 12px;
+}
+.note-content {
+  font-size: 1rem;
+  word-wrap: break-word;
+  margin: 12px;
+  white-space: pre-line;
+}
