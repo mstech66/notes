@@ -3,6 +3,10 @@
     height: auto;
 }
 
+.dialog{
+    border-radius: 8px;
+}
+
 .bg-yellow{
     background-color: #f3e782;
 }

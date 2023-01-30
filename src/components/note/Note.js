@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../../store/Modal";
-import NoteModal from "../modal/NoteModal";
 import "./Note.css";
 
 const Note = (props) => {

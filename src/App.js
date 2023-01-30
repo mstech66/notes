@@ -1,6 +1,6 @@
 import { Add } from "@mui/icons-material";
 import { Fab, ThemeProvider, useTheme } from "@mui/material";
-import React, { Component, useContext, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import NoteModal from "./components/modal/NoteModal";
@@ -47,7 +47,12 @@ const App = (props) => {
       <Nav />
       <div className="grid-container">
         {notes.map((note) => (
-          <Note key={note.id} title={note.title} content={note.content} />
+          <Note
+            key={note.id}
+            id={note.id}
+            title={note.title}
+            content={note.content}
+          />
         ))}
       </div>
       <Fab color="primary" className="fab" onClick={addNoteHandler}>

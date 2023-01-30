@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNotesModalContext } from "./GlobalModal";
 import "./Modal.css";
 import ReactDOM from "react-dom";
 import {
@@ -15,34 +14,62 @@ import { noteActions } from "../../store/Note";
 
 const NoteModal = () => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
+  let isUpdating = false;
   const open = useSelector((state) => state.modal.open);
   const data = useSelector((state) => {
-    console.log(state.modal);
+    if (state.modal.data.title === null && state.modal.data.content === null) {
+      isUpdating = false;
+    } else {
+      isUpdating = true;
+    }
     return state.modal.data;
   });
-  const hideModalHandler = () => {
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
+  const hideModalHandler = (event) => {
+    saveNoteHandler(event);
     dispatch(modalActions.hideModal());
+  };
+  const clearValues = () => {
+    setTitle(undefined);
+    setContent(undefined);
   };
   const saveNoteHandler = (event) => {
     event.preventDefault();
-    const data = {
-      id: Math.random(),
-      title: title,
-      content: content,
+    const newTitle = title === undefined ? data.title : title;
+    const newContent = content === undefined ? data.content : content;
+    let newData = {
+      title: newTitle,
+      content: newContent,
     };
-    console.log(data);
-    dispatch(noteActions.addNote(data));
+    if (!isUpdating) {
+      newData.id = Math.random();
+      if (newData.title !== null || newData.content !== null) {
+        dispatch(noteActions.addNote(newData));
+      }
+    } else {
+      newData.id = data.id;
+      dispatch(noteActions.updateNote(newData));
+    }
     dispatch(modalActions.hideModal());
+    clearValues();
   };
 
   return ReactDOM.createPortal(
-    <Dialog open={open} onClose={hideModalHandler} scroll="paper">
+    <Dialog
+      open={open}
+      onClose={hideModalHandler}
+      scroll="paper"
+      effect="Zoom"
+      PaperProps={{
+        style: { borderRadius: 8 },
+      }}
+    >
       <DialogContent className="noteModal bg-yellow">
         <InputBase
           className="input--title input--fullWidth"
           variant="standard"
+          autoFocus
           size="medium"
           defaultValue={data.title}
           onChange={({ target: { value } }) => setTitle(value)}
@@ -56,8 +83,10 @@ const NoteModal = () => {
           onChange={({ target: { value } }) => setContent(value)}
         />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={saveNoteHandler}>Save</Button>
+      <DialogActions className="bg-yellow">
+        <Button variant="outlined" onClick={hideModalHandler}>
+          Close
+        </Button>
       </DialogActions>
     </Dialog>,
     document.getElementById("modal-root")
