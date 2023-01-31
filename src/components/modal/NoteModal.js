@@ -84,7 +84,7 @@ const NoteModal = () => {
         />
       </DialogContent>
       <DialogActions className="bg-yellow">
-        <Button variant="outlined" onClick={hideModalHandler}>
+        <Button variant="standard" onClick={hideModalHandler}>
           Close
         </Button>
       </DialogActions>
