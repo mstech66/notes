@@ -25,6 +25,10 @@ const noteSlice = createSlice({
       });
       console.log(`Final Notes Arr`, state.notes);
     },
+    deleteNote(state, action) {
+      const id = action.payload.id;
+      state.notes = state.notes.filter((note) => note.id !== id);
+    },
   },
 });
 

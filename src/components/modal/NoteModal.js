@@ -55,6 +55,12 @@ const NoteModal = () => {
     clearValues();
   };
 
+  const deleteNoteHandler = (event) => {
+    event.preventDefault();
+    dispatch(noteActions.deleteNote(data));
+    dispatch(modalActions.hideModal());
+  };
+
   return ReactDOM.createPortal(
     <Dialog
       open={open}
@@ -84,6 +90,11 @@ const NoteModal = () => {
         />
       </DialogContent>
       <DialogActions className="bg-yellow">
+        {isUpdating && (
+          <Button variant="standard" onClick={deleteNoteHandler}>
+            Delete
+          </Button>
+        )}
         <Button variant="standard" onClick={hideModalHandler}>
           Close
         </Button>
