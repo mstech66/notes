@@ -15,6 +15,8 @@ import { noteActions } from "../../store/Note";
 const NoteModal = () => {
   const dispatch = useDispatch();
   let isUpdating = false;
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
   const open = useSelector((state) => state.modal.open);
   const data = useSelector((state) => {
     if (state.modal.data.title === null && state.modal.data.content === null) {
@@ -24,8 +26,6 @@ const NoteModal = () => {
     }
     return state.modal.data;
   });
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
   const hideModalHandler = (event) => {
     saveNoteHandler(event);
     dispatch(modalActions.hideModal());
