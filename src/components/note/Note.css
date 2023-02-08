@@ -6,9 +6,9 @@
   padding: 8px;
   color: #262626 !important;
   user-select: none;
-  overflow: hidden;
   max-height: 400px;
-  margin: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
 }
 .note:hover {
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
