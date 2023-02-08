@@ -61,6 +61,11 @@ const NoteModal = () => {
     dispatch(modalActions.hideModal());
   };
 
+  const handleNextInput = (event) => {
+    const contentInput = document.getElementById("content");
+    contentInput.focus();
+  };
+
   return ReactDOM.createPortal(
     <Dialog
       open={open}
@@ -73,14 +78,21 @@ const NoteModal = () => {
     >
       <DialogContent className="noteModal bg-yellow">
         <InputBase
+          id="title"
           className="input--title input--fullWidth"
           variant="standard"
           autoFocus
           size="medium"
           defaultValue={data.title}
           onChange={({ target: { value } }) => setTitle(value)}
+          onKeyUp={(e) => {
+            if (e.key === "Enter") {
+              handleNextInput(e);
+            }
+          }}
         />
         <InputBase
+          id="content"
           className="input--fullWidth"
           multiline
           variant="standard"

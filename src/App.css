@@ -1,24 +1,22 @@
 .grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  margin: 32px;
-  gap: 10px;
-  flex-wrap: wrap;
+  column-count: 6;
+  column-gap: 10px;
+  margin: 24px;
 }
-.fab{
-    top: auto;
-    bottom: 0px;
-    right: 0px;
-    left: auto;
-    position: absolute !important;
-    margin:32px !important;
+.fab {
+  top: auto;
+  bottom: 0px;
+  right: 0px;
+  left: auto;
+  position: absolute !important;
+  margin: 32px !important;
 }
 
-.input--title{
+.input--title {
   font-size: x-large !important;
   margin-bottom: 18px !important;
 }
 
-.input--fullWidth{
+.input--fullWidth {
   width: 100% !important;
 }
