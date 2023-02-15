@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { IconButton } from "@mui/material";
 import "./Nav.css";
 import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { themeActions } from "../../store/Theme";
 
 const Nav = (props) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const dispatch = useDispatch();
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
+
+  const toggleTheme = () => {
+    let bodyElement = document.querySelector("body");
+    if (isDarkMode) {
+      bodyElement.classList.add("darkMode");
+    } else {
+      bodyElement.classList.remove("darkMode");
+    }
+  };
+
+  useEffect(() => {
+    toggleTheme();
+  });
 
   const switchTheme = () => {
-    let bodyElement = document.querySelector("body");
-    bodyElement.classList.toggle("darkMode");
-    setIsDarkMode(!isDarkMode);
+    toggleTheme();
+    dispatch(themeActions.toggleTheme());
   };
 
   return (
@@ -21,7 +36,11 @@ const Nav = (props) => {
         variant="contained"
         aria-label="Switch Theme"
       >
-        {isDarkMode ? <DarkModeOutlined style={{color: 'white'}}/> : <LightModeOutlined />}
+        {isDarkMode ? (
+          <DarkModeOutlined style={{ color: "white" }} />
+        ) : (
+          <LightModeOutlined />
+        )}
       </IconButton>
     </nav>
   );
