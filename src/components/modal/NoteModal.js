@@ -7,6 +7,7 @@ import {
   DialogActions,
   DialogContent,
   InputBase,
+  Zoom,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../../store/Modal";
@@ -67,51 +68,55 @@ const NoteModal = () => {
   };
 
   return ReactDOM.createPortal(
-    <Dialog
-      open={open}
-      onClose={hideModalHandler}
-      scroll="paper"
-      effect="Zoom"
-      PaperProps={{
-        style: { borderRadius: 8 },
-      }}
-    >
-      <DialogContent className="noteModal bg-yellow">
-        <InputBase
-          id="title"
-          className="input--title input--fullWidth"
-          variant="standard"
-          autoFocus
-          size="medium"
-          defaultValue={data.title}
-          onChange={({ target: { value } }) => setTitle(value)}
-          onKeyUp={(e) => {
-            if (e.key === "Enter") {
-              handleNextInput(e);
-            }
+    <Zoom in={open}>
+      <div>
+        <Dialog
+          open={open}
+          onClose={hideModalHandler}
+          scroll="paper"
+          effect="Zoom"
+          PaperProps={{
+            style: { borderRadius: 8 },
           }}
-        />
-        <InputBase
-          id="content"
-          className="input--fullWidth"
-          multiline
-          variant="standard"
-          maxRows={20}
-          defaultValue={data.content}
-          onChange={({ target: { value } }) => setContent(value)}
-        />
-      </DialogContent>
-      <DialogActions className="bg-yellow">
-        {isUpdating && (
-          <Button variant="standard" onClick={deleteNoteHandler}>
-            Delete
-          </Button>
-        )}
-        <Button variant="standard" onClick={hideModalHandler}>
-          Close
-        </Button>
-      </DialogActions>
-    </Dialog>,
+        >
+          <DialogContent className="noteModal bg-yellow">
+            <InputBase
+              id="title"
+              className="input--title input--fullWidth"
+              variant="standard"
+              autoFocus
+              size="medium"
+              defaultValue={data.title}
+              onChange={({ target: { value } }) => setTitle(value)}
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  handleNextInput(e);
+                }
+              }}
+            />
+            <InputBase
+              id="content"
+              className="input--fullWidth"
+              multiline
+              variant="standard"
+              maxRows={20}
+              defaultValue={data.content}
+              onChange={({ target: { value } }) => setContent(value)}
+            />
+          </DialogContent>
+          <DialogActions className="bg-yellow">
+            {isUpdating && (
+              <Button variant="standard" onClick={deleteNoteHandler}>
+                Delete
+              </Button>
+            )}
+            <Button variant="standard" onClick={hideModalHandler}>
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </Zoom>,
     document.getElementById("modal-root")
   );
 };
