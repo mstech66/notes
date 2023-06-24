@@ -26,7 +26,7 @@ const NotesList = (props) => {
     <div>
       <div className="grid-container">
         {notes.map((note) => (
-          <Zoom in={true}>
+          <Zoom in={true} timeout={500} style={{ transitionDelay: true ? "1000ms" : "0ms" }}>
             <div>
               <Note
                 key={note.id}

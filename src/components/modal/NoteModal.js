@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../../store/Modal";
 import { noteActions } from "../../store/Note";
+import DialogTransition from "./DialogTransition";
 
 const NoteModal = () => {
   const dispatch = useDispatch();
@@ -68,13 +69,13 @@ const NoteModal = () => {
   };
 
   return ReactDOM.createPortal(
-    <Zoom in={open}>
+    <Zoom in={open} timeout={500}>
       <div>
         <Dialog
           open={open}
           onClose={hideModalHandler}
           scroll="paper"
-          effect="Zoom"
+          TransitionComponent={DialogTransition}
           PaperProps={{
             style: { borderRadius: 8 },
           }}
